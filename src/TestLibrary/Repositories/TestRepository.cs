@@ -12,18 +12,20 @@ public class TestRepository : ITestRepository
     {
         _appDbContext = appDbContext;
     }
-    public async Task<IEnumerable<TestDtoGuidProblem>> Get()
+
+    public async Task<IEnumerable<Test>> Get()
     {
         var connection = _appDbContext.GetConnection();
 
-        return await connection.QueryAsync<TestDtoGuidProblem>("SELECT * FROM Test");
+        return await connection.QueryAsync<Test>("SELECT * FROM Test;");
     }
 
-    public async Task<TestDtoGuidProblem> GetById(string id)
+    public async Task<Test> GetById(Guid id)
     {
         var connection = _appDbContext.GetConnection();
 
-        return await connection.QuerySingleOrDefaultAsync<TestDtoGuidProblem>("SELECT * FROM Test WHERE ID = @ID LIMIT 1;", new {ID = id});
+        return await connection.QuerySingleOrDefaultAsync<Test>("SELECT * FROM Test WHERE ID = @ID LIMIT 1;",
+            new { ID = id });
     }
 
     public async Task CreateTest(Test test)

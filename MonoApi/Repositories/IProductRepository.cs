@@ -1,6 +1,6 @@
-﻿using MinimalApi.Model;
+﻿using MonoApi.Model;
 
-namespace MinimalApi.Repositories;
+namespace MonoApi.Repositories;
 
 public interface IProductRepository
 {

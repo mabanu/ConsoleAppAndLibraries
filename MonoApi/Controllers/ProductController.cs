@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MinimalApi.Model;
-using MinimalApi.Repositories;
+using MonoApi.Model;
+using MonoApi.Repositories;
 
-namespace MinimalApi.Controllers;
+namespace MonoApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -18,7 +18,7 @@ public class ProductController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Product>>> Get()
     {
-        return Ok( await _productRepository.Get());
+        return Ok(await _productRepository.Get());
     }
 
     [HttpPost]

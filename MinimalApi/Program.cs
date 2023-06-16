@@ -1,25 +1,28 @@
-using MinimalApi.Database;
-using MinimalApi.Repositories;
+using Dapper;
+using MinimalApi;
 using SharedLibrary.Database;
 using TestLibrary;
 using TestLibrary.Database;
+using Users;
+using Users.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 builder.Services.AddSingleton(new DbConnectionString()
-    { ConnectionString = builder.Configuration.GetValue<string>("DatabaseName")! });
-builder.Services.AddSingleton(new DatabaseConfig()
     { ConnectionString = builder.Configuration.GetValue<string>("DatabaseName")! });
 
 builder.Services.AddSingleton<AppDbContext>();
 
-builder.Services.AddSingleton<IDatabaseBootstrap, DatabaseBootstrap>();
-builder.Services.AddSingleton<IProductRepository, ProductRepository>();
-
-builder.Services.AddControllers();
-builder.Services.AddTestLibrary();
+builder.Services.AddTestModule();
+builder.Services.AddUserModule();
 
 builder.Services.AddSwaggerGen();
+
+// Fix Guid problem with dapper
+SqlMapper.AddTypeHandler(new GuidTypeHandler());
+SqlMapper.RemoveTypeMap(typeof(Guid));
+SqlMapper.RemoveTypeMap(typeof(Guid));
 
 var app = builder.Build();
 
@@ -27,8 +30,9 @@ var app = builder.Build();
     using var appscope = app.Services.CreateScope();
 
     var dbContext = appscope.ServiceProvider.GetRequiredService<AppDbContext>();
-    
+
     dbContext.TestExtension();
+    dbContext.UserExtension();
 }
 
 if (app.Environment.IsDevelopment())
@@ -39,6 +43,6 @@ if (app.Environment.IsDevelopment())
 
 app.MapGet("/", () => "yeah");
 app.MapControllers();
-app.UseTestLibrary();
+app.UseTestModule();
 
 app.Run();

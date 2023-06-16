@@ -1,4 +1,4 @@
-﻿namespace MinimalApi.Database;
+﻿namespace MonoApi.Database;
 
 public interface IDatabaseBootstrap
 {

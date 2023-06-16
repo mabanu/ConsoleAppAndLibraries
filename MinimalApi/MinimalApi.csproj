@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\src\TestLibrary\TestLibrary.csproj" />
+      <ProjectReference Include="..\Users\Users.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

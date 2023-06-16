@@ -1,4 +1,4 @@
-﻿namespace MinimalApi.Model;
+﻿namespace MonoApi.Model;
 
 public class Product
 {

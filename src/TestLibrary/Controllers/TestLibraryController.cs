@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TestLibrary.Model;
 using TestLibrary.Repositories;
 
@@ -17,13 +16,13 @@ public class TestLibraryController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<TestDtoGuidProblem>>> GetTest()
+    public async Task<ActionResult<IEnumerable<Test>>> GetTest()
     {
         return Ok(await _testRepository.Get());
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<TestDtoGuidProblem>> GetTest([FromRoute]string id)
+    public async Task<ActionResult<Test>> GetTest([FromRoute] Guid id)
     {
         return Ok(await _testRepository.GetById(id));
     }
@@ -31,8 +30,8 @@ public class TestLibraryController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Test>> Post([FromBody] Test test)
     {
-         await _testRepository.CreateTest(test);
+        await _testRepository.CreateTest(test);
 
-         return CreatedAtAction("GetTest", new { id = test.ID }, test);
+        return CreatedAtAction("GetTest", new { id = test.ID }, test);
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using Microsoft.Data.Sqlite;
 using SharedLibrary.Database;
 
 namespace TestLibrary.Database;

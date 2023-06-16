@@ -1,9 +1,9 @@
 ﻿using Dapper;
 using Microsoft.Data.Sqlite;
-using MinimalApi.Database;
-using MinimalApi.Model;
+using MonoApi.Database;
+using MonoApi.Model;
 
-namespace MinimalApi.Repositories;
+namespace MonoApi.Repositories;
 
 public class ProductRepository : IProductRepository
 {
@@ -13,9 +13,10 @@ public class ProductRepository : IProductRepository
     {
         _databaseConfig = databaseConfig;
     }
+
     public async Task<IEnumerable<Product>> Get()
     {
-        using var connection = new SqliteConnection(_databaseConfig.ConnectionString);
+        await using var connection = new SqliteConnection(_databaseConfig.ConnectionString);
 
         return await connection.QueryAsync<Product>("SELECT rowid AS Id, Name, Description FROM Product;");
     }

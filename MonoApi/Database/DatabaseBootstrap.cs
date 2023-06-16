@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Data.Sqlite;
 
-namespace MinimalApi.Database;
+namespace MonoApi.Database;
 
 public class DatabaseBootstrap : IDatabaseBootstrap
 {
@@ -11,6 +11,7 @@ public class DatabaseBootstrap : IDatabaseBootstrap
     {
         _databaseConfig = databaseConfig;
     }
+
     public void Setup()
     {
         using var connection = new SqliteConnection(_databaseConfig.ConnectionString);
@@ -18,6 +19,5 @@ public class DatabaseBootstrap : IDatabaseBootstrap
         connection.Execute("CREATE TABLE IF NOT EXISTS Product (" +
                            " Name VARCHAR(100) NOT NULL," +
                            "Description VARCHAR(1000) NULL);");
-
     }
 }

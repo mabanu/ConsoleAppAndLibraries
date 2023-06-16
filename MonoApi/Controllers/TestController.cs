@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace MinimalApi.Controllers;
+namespace MonoApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -10,6 +10,6 @@ public class TestController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public ActionResult<string> GetTest()
     {
-        return  Ok("fuck yeah");
+        return Ok("fuck yeah");
     }
 }

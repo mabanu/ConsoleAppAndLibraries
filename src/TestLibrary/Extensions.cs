@@ -6,7 +6,7 @@ namespace TestLibrary;
 
 public static class Extensions
 {
-    public static IServiceCollection AddTestLibrary(this IServiceCollection services)
+    public static IServiceCollection AddTestModule(this IServiceCollection services)
     {
         services.AddControllers();
         services.AddSingleton<ITestRepository, TestRepository>();
@@ -14,7 +14,7 @@ public static class Extensions
         return services;
     }
 
-    public static IApplicationBuilder UseTestLibrary(this IApplicationBuilder app)
+    public static IApplicationBuilder UseTestModule(this IApplicationBuilder app)
     {
         return app;
     }
